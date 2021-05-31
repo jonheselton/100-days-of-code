@@ -1,5 +1,25 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
             'v', 'w', 'x', 'y', 'z']
+# Combine the encrypt() and decrypt() functions into a single function called caesar().
+def caesar(string,number,direction):
+    if direction == 'encode':
+        encrypted_string = ''
+        for letter in string:
+            encoded_letter = alphabet.index(letter) + number
+            if encoded_letter > 25:
+                encoded_letter += -25
+            encrypted_string += alphabet[encoded_letter]
+
+        return encrypted_string
+    elif direction == 'decode':
+        decrypted_string = ''
+        for letter in string:
+            decoded_letter = alphabet.index(letter) - number
+            if decoded_letter < 0:
+                decoded_letter += 25
+            decrypted_string += alphabet[decoded_letter]
+
+        return decrypted_string
 
 # Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
 def encrypt(string, number):
@@ -45,10 +65,7 @@ def main():
     text = input("Type your message:\n").lower()
     shift = int(input("Type the shift number:\n"))
     # Call the encrypt function and pass in the user inputs. You should be able to test the code and encrypt a message.
-    if direction == 'encode':
-        print(encrypt(text, shift))
-    elif direction == 'decode':
-        print(decrypt(text, shift))
+    print(caesar(text, shift, direction))
 
 if __name__ == "__main__":
     main()
