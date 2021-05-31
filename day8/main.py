@@ -18,9 +18,9 @@ def encrypt(string, number):
     # https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-in-a-list
     ##🐛Bug alert: What happens if you try to encode the word 'civilization'?🐛
 
-#TODO-1: Create a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
+# Create a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
 def decrypt(string, number):
-    # TODO-2: Inside the 'decrypt' function, shift each letter of the 'text' *backwards* in the alphabet by the shift amount and print the decrypted text.
+    # Inside the 'decrypt' function, shift each letter of the 'text' *backwards* in the alphabet by the shift amount and print the decrypted text.
     # e.g.
     # cipher_text = "mjqqt"
     # shift = 5
