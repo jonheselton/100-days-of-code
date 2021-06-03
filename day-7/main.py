@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 import random
 from wordlist import word_list
 import hangman_art
