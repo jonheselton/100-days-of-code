@@ -30,3 +30,9 @@ resources = {
     "coffee": 100,
 }
 
+coins = {
+    'nickel': 0,
+    'dime' : 0,
+    'quarter': 0,
+}
+

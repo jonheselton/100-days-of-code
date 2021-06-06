@@ -13,32 +13,46 @@ def machine_menu(supplies):
         print('Powering off...')
         return exit()
     elif choice == 'l':
-        check_supplies_for_drink(supplies, coffees['latte'])
+        return check_supplies_for_drink(supplies, coffees['latte'])
     elif choice == 'e':
-        check_supplies_for_drink(supplies, coffees['espresso'])
+        return check_supplies_for_drink(supplies, coffees['espresso'])
     elif choice == 'c':
-        check_supplies_for_drink(supplies, coffees['cappuccino'])
+        return check_supplies_for_drink(supplies, coffees['cappuccino'])
 
 
 def report(supplies):
     print(supplies)
+    return supplies
 
 
 # check supplies
 def check_supplies_for_drink(supplies, drink):
-    for k, v in supplies.items():
-        if not v >= drink['ingredients'][k]:
+    for k, v in drink['ingredients'].items():
+        if v > supplies[k]:
             print('not enough ' + k)
             return machine_menu(supplies)
+    return get_money(drink, supplies)
 
-    return make_drink(drink, supplies)
+
+def get_money(drink, supplies):
+    total_inserted = float(0)
+    for k, v in coins.items():
+        coins[k] = float(input('insert {} : '.format(k)))
+    total_inserted += coins['nickel'] * .05
+    total_inserted += coins['dime'] * .10
+    total_inserted += coins['quarter'] * .25
+    if total_inserted >= drink['cost']:
+        print('returning {}'.format(total_inserted - float(drink['cost'])))
+        return make_drink(drink, supplies)
+    else:
+        print('not enough cash money, returning coins')
+        return supplies
 
 
 def make_drink(drink, supplies):
     if drink == coffees['cappuccino']:
         print('make a cappuccino')
         remaining_supplies = {key: supplies[key] - coffees['cappuccino']['ingredients'].get(key, 0) for key in supplies}
-        print(remaining_supplies)
         return remaining_supplies
     elif drink == coffees['espresso']:
         remaining_supplies = {key: supplies[key] - coffees['espresso']['ingredients'].get(key, 0) for key in supplies}
@@ -52,17 +66,18 @@ def make_drink(drink, supplies):
         print('invalid choice')
 
 
-# TODO-1 insert coins
-# TODO-2 make change
-# TODO-3 subtract used resources
-# TODO-4 implement while loop to keep the machine on
 coffees = data.MENU
-current_supplies = data.resources
+coins = data.coins
 
 
 def main():
-    global current_supplies
-    print(machine_menu(current_supplies))
+    current_supplies = data.resources
+    keep_going = True
+
+    while keep_going:
+        current_supplies = machine_menu(current_supplies)
+
+
 
 
 if __name__ == "__main__":
