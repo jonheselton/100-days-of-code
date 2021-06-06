@@ -20,7 +20,6 @@ def machine_menu(supplies):
         check_supplies_for_drink(supplies, coffees['cappuccino'])
 
 
-
 def report(supplies):
     print(supplies)
 
@@ -28,7 +27,6 @@ def report(supplies):
 # check supplies
 def check_supplies_for_drink(supplies, drink):
     for k, v in supplies.items():
-        print(k, v)
         if not v >= drink['ingredients'][k]:
             print('not enough ' + k)
             return machine_menu(supplies)
@@ -39,24 +37,33 @@ def check_supplies_for_drink(supplies, drink):
 def make_drink(drink, supplies):
     if drink == coffees['cappuccino']:
         print('make a cappuccino')
+        remaining_supplies = {key: supplies[key] - coffees['cappuccino']['ingredients'].get(key, 0) for key in supplies}
+        print(remaining_supplies)
+        return remaining_supplies
     elif drink == coffees['espresso']:
+        remaining_supplies = {key: supplies[key] - coffees['espresso']['ingredients'].get(key, 0) for key in supplies}
         print('make an espresso')
+        return print(remaining_supplies)
     elif drink == coffees['latte']:
+        remaining_supplies = {key: supplies[key] - coffees['latte']['ingredients'].get(key, 0) for key in supplies}
         print('make a latte')
+        return remaining_supplies
     else:
         print('invalid choice')
 
 
 # TODO-1 insert coins
 # TODO-2 make change
-# TODO-3 subtract used resouurces
+# TODO-3 subtract used resources
 # TODO-4 implement while loop to keep the machine on
 coffees = data.MENU
 current_supplies = data.resources
 
-def main():
 
-    choice = machine_menu(current_supplies)
+def main():
+    global current_supplies
+    current_supplies = machine_menu(current_supplies)
+    print(current_supplies)
 
 
 if __name__ == "__main__":
