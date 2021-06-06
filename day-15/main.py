@@ -62,8 +62,8 @@ current_supplies = data.resources
 
 def main():
     global current_supplies
-    current_supplies = machine_menu(current_supplies)
-    print(current_supplies)
+    print(machine_menu(current_supplies))
+
 
 
 if __name__ == "__main__":
