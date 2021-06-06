@@ -43,7 +43,7 @@ def make_drink(drink, supplies):
     elif drink == coffees['espresso']:
         remaining_supplies = {key: supplies[key] - coffees['espresso']['ingredients'].get(key, 0) for key in supplies}
         print('make an espresso')
-        return print(remaining_supplies)
+        return remaining_supplies
     elif drink == coffees['latte']:
         remaining_supplies = {key: supplies[key] - coffees['latte']['ingredients'].get(key, 0) for key in supplies}
         print('make a latte')
@@ -63,7 +63,6 @@ current_supplies = data.resources
 def main():
     global current_supplies
     print(machine_menu(current_supplies))
-
 
 
 if __name__ == "__main__":
