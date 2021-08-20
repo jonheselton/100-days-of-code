@@ -11,6 +11,6 @@ if __name__ == "__main__":
     
     """
 os.mkdir(sys.argv[1])
-fo = open(sys.argv[1] + '/main.py', 'w+')
+fo = open(sys.argv[1] + '/scratch.py', 'w+')
 fo.write(template)
 fo.close()
