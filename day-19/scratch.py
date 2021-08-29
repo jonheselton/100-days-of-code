@@ -55,12 +55,12 @@ class Race:
         self.winner = None
         
     def go(self):
-        for racer in self.racers:
-            racer.forward(randint(0, 10))
-            if self.race_over(racer):
-                return "We have a winner"
-            else:
-                return self.go()
+        while self.winner == None:
+            for racer in self.racers:
+                racer.forward(randint(0, 10))
+                if self.race_over(racer):
+                    return "We have a winner"
+
 
     def race_over(self, competitor):
         if competitor.pos()[0] > 255:
