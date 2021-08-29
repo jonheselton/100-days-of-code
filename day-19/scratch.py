@@ -64,6 +64,7 @@ class Race:
 
     def race_over(self, competitor):
         if competitor.pos()[0] > 255:
+            self.winner = competitor
             return competitor
 
 
