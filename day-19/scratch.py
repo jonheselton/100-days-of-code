@@ -52,22 +52,19 @@ class Race:
         self.green.color('green')
         self.green.setposition(0, 200)
         self.racers = [self.blue, self.red, self.orange, self.green, self.yellow]
-        self.winner = null
+        self.winner = None
+        
     def go(self):
         for racer in self.racers:
             racer.forward(randint(0, 10))
-            if racer.pos()[0] > 255:
-                self.winner = racer
-                
+            if self.race_over(racer):
+                return "We have a winner"
             else:
-                self.go()
+                return self.go()
 
-
-    def winner(self):
-        for racer in self.racers:
-            if racer.pos()[0] > 255:
-                racer.won = True
-
+    def race_over(self, competitor):
+        if competitor.pos()[0] > 255:
+            return competitor
 
 
 def main():
