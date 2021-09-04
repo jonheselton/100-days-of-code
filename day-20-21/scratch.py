@@ -17,7 +17,7 @@ class Snake:
             segment.color("white")
             segment.pu()
             segment.setpos(x, y)
-            x = x + 20
+            x = x + 30
             self.segments.append(segment)
         self.head = self.segments[0]
 
@@ -60,6 +60,15 @@ class Snake:
     def dn(self):
         if self.head.heading() != 90:
             self.head.seth(270)
+    
+    def you_lose(self):
+        for i in range(1,self.length):
+            if self.segments[i].distance(self.head) < 1:
+                return False
+        if abs(self.head.xcor()) >= 300 or abs(self.head.ycor()) >= 300:
+            return False
+        else:
+            return True
 
 def main():
     screen = Screen()
@@ -71,11 +80,6 @@ def main():
     game = Snake()
     game.snake()
 
-    score = Turtle()
-    score.setpos(-39, 280)
-    score.color('white')
-    score.write('Score')
-
     screen.onkey(game.up, 'w')
     screen.onkey(game.lf, 'a')
     screen.onkey(game.dn, 's')
@@ -83,13 +87,21 @@ def main():
     screen.listen()
 
     game.place_fruit()
+    score = Turtle()
     game_on = True
     while game_on:
+        score.clear()
+        score.setpos(-39, 280)
+        score.color('white')
+        score.write("Score: " + str(game.length-3))
+        score.hideturtle()
         game.snake_eats_fruit()
         screen.update()
         time.sleep(0.1)
         game.move()
-
+        print(game_on)
+        game_on = game.you_lose()
+        print(game_on)
 
 
 
