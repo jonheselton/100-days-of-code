@@ -2,6 +2,7 @@
 from turtle import Screen
 from turtle import Turtle
 from random import randint
+import time
 
 class Paddle(Turtle):
 
@@ -33,16 +34,46 @@ class Ball(Turtle):
         self.color('white')
         self.pu()
         self.setpos(0,0)
-    
-    def start(self):
-        if randint(0,1) == 1:
-            heading = randint(36, 125)
-        else:
-            heading = randint(215, 305)
+        heading = randint(0, 360)
         self.seth(heading)
     
     def go(self):
-        self.forward(20)
+        self.forward(5)
+        print(self.ycor())
+        if abs(self.ycor()) >= 275:
+            self.bounce()
+    
+    def bounce(self):
+        if self.heading() < 90 and self.heading() > 0:
+            self.seth(self.heading() + 270)
+            self.forward(20)
+        elif self.heading() > 90 and self.heading() < 180:
+            self.seth(self.heading() + 90)
+            self.forward(20)
+        elif self.heading() > 180 and self.heading() < 270:
+            self.seth(self.heading() - 90)
+            self.forward(20)
+        elif self.heading() > 270 and self.heading() < 360:
+            self.seth(self.heading() - 270)
+            self.forward(20)
+        else:
+            pass
+
+    def paddle_bounce(self):
+        if self.heading() < 90 and self.heading() > 0:
+            self.seth(self.heading() + 90)
+            self.forward(20)
+        elif self.heading() > 90 and self.heading() < 180:
+            self.seth(self.heading() + 90)
+            self.forward(20)
+        elif self.heading() > 180 and self.heading() < 270:
+            self.seth(self.heading() - 90)
+            self.forward(20)
+        elif self.heading() > 270 and self.heading() < 360:
+            self.seth(self.heading() - 90)
+            self.forward(20)
+        else:
+            pass
 
 def main():
     screen = Screen()
@@ -63,6 +94,9 @@ def main():
     while game_on:
         ball.go()
         screen.update()
+        if abs(ball.xcor()) >= 375 and (ball.distance(r_paddle) < 50 or ball.distance(l_paddle) < 50):
+            ball.paddle_bounce()
+        time.sleep(.1)
     
     screen.exitonclick()
 
