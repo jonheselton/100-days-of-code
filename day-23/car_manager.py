@@ -36,7 +36,8 @@ class CarManager:
             if car.distance(player) < 5:
                 return False
             else:
-                return True
+                pass
+        return True
     
 
         

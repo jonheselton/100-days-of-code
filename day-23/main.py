@@ -29,3 +29,5 @@ while game_is_on:
     if player.score():
         score_board.next_level()
         car_manager.level_up()
+
+print(game_is_on)
