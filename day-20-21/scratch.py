@@ -70,6 +70,7 @@ class Snake:
         else:
             return True
 
+    
 def main():
     screen = Screen()
     screen.setup(height=600, width=600)
@@ -88,20 +89,36 @@ def main():
 
     game.place_fruit()
     score = Turtle()
+    highscore = 0
     game_on = True
     while game_on:
+        if highscore < game.length-3:
+            highscore = game.length-3
+        else:
+            pass
         score.clear()
         score.setpos(-39, 280)
         score.color('white')
-        score.write("Score: " + str(game.length-3))
+        score.write("Score: " + str(game.length-3) + "  Highscore: " + str(highscore))
         score.hideturtle()
         game.snake_eats_fruit()
         screen.update()
         time.sleep(0.1)
         game.move()
-        print(game_on)
         game_on = game.you_lose()
-        print(game_on)
+        if game_on == False:
+            loser = Turtle()
+            loser.clear()
+            loser.color('white')
+            loser.write('You Lose - Play Again? (y/n)')
+            screen.update()
+            response = input('Play again? ')
+            if response == 'y':
+                game_on = True
+                game = Snake()
+                game.snake()
+                game.place_fruit()
+                screen.update()
 
 
 
